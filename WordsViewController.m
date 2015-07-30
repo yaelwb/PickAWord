@@ -97,4 +97,9 @@
     [self.navigationController pushViewController:awvc animated:YES];
 }
 
+-(void) storeData
+{
+    [wordBank storeData];
+}
+
 @end

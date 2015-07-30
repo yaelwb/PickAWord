@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *showDefBtn;
 @property (weak, nonatomic) IBOutlet UILabel *definition;
 
+-(void) storeData;
 @end

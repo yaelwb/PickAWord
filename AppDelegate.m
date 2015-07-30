@@ -10,7 +10,9 @@
 #import "WordsViewController.h"
 
 @interface AppDelegate ()
-
+{
+    WordsViewController *wvc;
+}
 @end
 
 @implementation AppDelegate
@@ -21,7 +23,7 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    WordsViewController *wvc = [[WordsViewController alloc] init];
+    wvc = [[WordsViewController alloc] init];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:wvc];
     
@@ -51,6 +53,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [wvc storeData];
 }
 
 @end
