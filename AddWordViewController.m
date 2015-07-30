@@ -63,18 +63,17 @@
 }
 
 - (BOOL) textFieldShouldReturn: (UITextField *)textField
-{
-    //NSLog(@"%@" , textField.text);
-    
-    //textField.text = @""; // clear text field
+{    
     [textField resignFirstResponder]; // keyboard dismissed
     return YES;
 }
+
 -(void) saveWord
 {
     [wordBank addWord:_wordField.text AndDef:_defField.text];
     [self clear];
 }
+
 -(void) clear
 {
     _wordField.text = @"";
@@ -91,18 +90,26 @@
 
 - (IBAction)googleWord:(id)sender
 {
-    NSString *urlAddress = @"https://www.google.com/webhp?gws_rd=ssl#q=";
-    NSString *searchPhrase = [_wordField text];
-    NSArray *searchWords = [searchPhrase componentsSeparatedByString:@" "];
-    NSString *searchStr = searchWords[0];
-    
-    for( int i =1; i < searchWords.count ; i++)
+    NSString *urlAddress;
+    if([[_wordField text] isEqualToString:@""])
     {
-        searchStr = [searchStr stringByAppendingString:@"+"];
-        searchStr = [searchStr stringByAppendingString:searchWords[i]];
+        urlAddress = @"http://www.google.com";
     }
-    
-    urlAddress = [urlAddress stringByAppendingString:searchStr];
+    else
+    {
+        urlAddress = @"https://www.google.com/webhp?gws_rd=ssl#q=define+";
+        NSString *searchPhrase = [_wordField text];
+        NSArray *searchWords = [searchPhrase componentsSeparatedByString:@" "];
+        NSString *searchStr = searchWords[0];
+        
+        for( int i =1; i < searchWords.count ; i++)
+        {
+            searchStr = [searchStr stringByAppendingString:@"+"];
+            searchStr = [searchStr stringByAppendingString:searchWords[i]];
+        }
+        
+        urlAddress = [urlAddress stringByAppendingString:searchStr];
+    }
     
     NSURL *url = [NSURL URLWithString:urlAddress];
     //URL Requst Object
