@@ -53,6 +53,10 @@
     return wordToDef.allKeys;
 }
 
+-(NSArray *) getSortedWordsArray {
+    return [[wordToDef allKeys] sortedArrayUsingSelector:@selector(compare:)];
+}
+
 -(void) storeData
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

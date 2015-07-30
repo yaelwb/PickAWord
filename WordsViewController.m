@@ -14,6 +14,7 @@
 {
     WordBank * wordBank;
     AddWordViewController *awvc;
+    NSArray * sortedWords;
 }
 
 @end
@@ -25,6 +26,7 @@
     [super viewDidLoad];
     
     wordBank = [[WordBank alloc] init];
+    sortedWords = [[NSArray alloc] init];
     
     // Connect data
     self.wordPicker.dataSource = self;
@@ -35,10 +37,14 @@
     
     UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWord)];
     navItem.rightBarButtonItem = bbi;
+    
+    sortedWords = [wordBank getSortedWordsArray];
 }
 
 -(void) viewDidAppear:(BOOL)animated
 {
+    sortedWords = [wordBank getSortedWordsArray];
+    
     int num = arc4random () %[wordBank getWordCount];
     
     [_wordPicker selectRow:num inComponent:0 animated:YES];
@@ -63,7 +69,7 @@
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return wordBank.getWordsArray[row];
+    return sortedWords[row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -82,7 +88,7 @@
 
 - (IBAction)showDef:(id)sender
 {
-    NSString *word  = wordBank.getWordsArray[[_wordPicker selectedRowInComponent:0]];
+    NSString *word  = sortedWords[[_wordPicker selectedRowInComponent:0]];
 
     self.definition.text = [wordBank getDefOfWord:word];
 }

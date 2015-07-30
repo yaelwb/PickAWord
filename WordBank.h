@@ -15,6 +15,7 @@
 -(NSString *) getDefOfWord:(NSString *) word;
 -(NSUInteger) getWordCount;
 -(NSArray *) getWordsArray;
+-(NSArray *) getSortedWordsArray;
 -(void) storeData;
 -(void) restoreData;
 @end
