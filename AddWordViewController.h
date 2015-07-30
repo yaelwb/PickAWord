@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "WordBank.h"
 
-@interface AddWordViewController : UIViewController 
+@interface AddWordViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic,weak) IBOutlet UITextField *wordField;
 @property (nonatomic,weak) IBOutlet UITextField *defField;
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 -(instancetype) initWithBank:(WordBank *) bank;
 
 
